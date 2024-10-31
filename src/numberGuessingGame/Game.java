@@ -20,13 +20,15 @@ public class Game {
 	}
 
 	private static boolean round(Scanner input) {
+		RandomNumber number = new RandomNumber();
+		System.out.println(number.getNumber());
 		for (int i = 1; i <= 5; i++) {
 			System.out.print("Guess " + i + "/5: ");
 			int guess = input.nextInt();
-			if (guess > 6) {
+			if (guess > number.getNumber()) {
 				System.out.println("Too high!");
 			}
-			else if (guess < 6) {
+			else if (guess < number.getNumber()) {
 				System.out.println("Too low!");
 			}
 			else {
