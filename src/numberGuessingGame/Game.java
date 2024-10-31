@@ -6,9 +6,10 @@ public class Game {
 
 	public static void main(String[] args) {
 		System.out.println("Welcome!");
-		System.out.println("Guess the correct number between 0 and 10!");
 		Scanner input = new Scanner(System.in);
-		boolean guessedSuccessfully = round(input);
+		System.out.print("Guess the correct number between 0 and ");
+		int maximumNumber = input.nextInt();
+		boolean guessedSuccessfully = round(input, maximumNumber);
 		input.close();
 		if (guessedSuccessfully) {
 			System.out.println("Congrats! You got it!");
@@ -19,9 +20,8 @@ public class Game {
 		}
 	}
 
-	private static boolean round(Scanner input) {
-		RandomNumber number = new RandomNumber();
-		System.out.println(number.getNumber());
+	private static boolean round(Scanner input, int maximumNumber) {
+		RandomNumber number = new RandomNumber(maximumNumber);
 		for (int i = 1; i <= 5; i++) {
 			System.out.print("Guess " + i + "/5: ");
 			int guess = input.nextInt();
