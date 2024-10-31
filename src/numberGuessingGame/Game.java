@@ -7,16 +7,19 @@ public class Game {
 	public static void main(String[] args) {
 		System.out.println("Welcome!");
 		Scanner input = new Scanner(System.in);
-		System.out.print("Guess the correct number between 0 and ");
-		int maximumNumber = input.nextInt();
-		boolean guessedSuccessfully = round(input, maximumNumber);
-		input.close();
-		if (guessedSuccessfully) {
-			System.out.println("Congrats! You got it!");
-		}
-		else {
-			System.out.println("You didn't get it. :(");
-			System.out.println("Maybe next time.");			
+		while (true) {
+			System.out.print("Guess the correct number between 0 and ");
+			int maximumNumber = input.nextInt();
+			boolean guessedSuccessfully = round(input, maximumNumber);
+			if (guessedSuccessfully) {
+				System.out.println("Congrats! You got it!");
+			}
+			else {
+				System.out.println("You didn't get it. :(");
+				System.out.println("Maybe next time.");			
+			}
+			System.out.println();
+			
 		}
 	}
 
