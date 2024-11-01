@@ -12,14 +12,7 @@ public class Game {
 			int maximumNumber = Utils.promptUserForNumber(input, "Guess the correct number between 0 and ");
 			int numberOfGuesses = Utils.promptUserForNumber(input, "How many guesses do you want to have? ");
 			GameSettings gameSettings = new GameSettings(maximumNumber, numberOfGuesses);
-			boolean guessedSuccessfully = round(input, gameSettings);
-			if (guessedSuccessfully) {
-				System.out.println("Congrats! You got it!");
-			}
-			else {
-				System.out.println("You didn't get it. :(");
-				System.out.println("Maybe next time.");			
-			}
+			round(input, gameSettings);
 			System.out.println("Want to guess another number?");
 			String quit = input.next();
 			if (quit.equalsIgnoreCase("yes")) {
@@ -32,7 +25,7 @@ public class Game {
 		}
 	}
 
-	private static boolean round(Scanner input, GameSettings gameSettings) {
+	private static void round(Scanner input, GameSettings gameSettings) {
 		RandomNumber number = new RandomNumber(gameSettings.getMaximumNumber());
 		for (int i = 1; i <= gameSettings.getNumberOfGuesses(); i++) {
 			System.out.print("Guess " + i + "/" + gameSettings.getNumberOfGuesses() + ": ");
@@ -45,10 +38,12 @@ public class Game {
 				System.out.println("Too low!");
 			}
 			else {
-				return true;
+				System.out.println("Congrats! You got it!");
+				return;
 			}
 		}
-		return false;
+		System.out.println("You didn't get it. :(");
+		System.out.println("Maybe next time.");	
 	}
 
 }
