@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class Game {
 
 	public static void main(String[] args) {
+		Utils.clearScreen();
 		System.out.println("Welcome!");
-		Scanner input = new Scanner(System.in);
 		while (true) {
-			System.out.print("Guess the correct number between 0 and ");
-			int maximumNumber = input.nextInt();
+			Scanner input = new Scanner(System.in);
+			int maximumNumber = Utils.promptUserForNumber(input);
 			boolean guessedSuccessfully = round(input, maximumNumber);
 			if (guessedSuccessfully) {
 				System.out.println("Congrats! You got it!");
@@ -18,8 +18,15 @@ public class Game {
 				System.out.println("You didn't get it. :(");
 				System.out.println("Maybe next time.");			
 			}
-			System.out.println();
-			
+			System.out.println("Want to guess another number?");
+			String quit = input.next();
+			if (quit.equalsIgnoreCase("yes")) {
+				Utils.clearScreen();
+			}
+			else {
+				System.out.println("Ok bye!");
+				return;
+			}
 		}
 	}
 
@@ -28,6 +35,7 @@ public class Game {
 		for (int i = 1; i <= 5; i++) {
 			System.out.print("Guess " + i + "/5: ");
 			int guess = input.nextInt();
+			input.nextLine();
 			if (guess > number.getNumber()) {
 				System.out.println("Too high!");
 			}
