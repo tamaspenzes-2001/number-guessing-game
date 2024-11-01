@@ -7,7 +7,7 @@ public class RandomNumber {
 
 	public RandomNumber(int maximumNumber) {
 		Random random = new Random();
-		number = random.nextInt(maximumNumber+1);
+		number = random.nextInt(maximumNumber)+1;
 	}
 
 	public int getNumber() {

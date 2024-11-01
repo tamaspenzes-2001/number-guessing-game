@@ -9,8 +9,8 @@ public class Game {
 		System.out.println("Welcome!");
 		while (true) {
 			Scanner input = new Scanner(System.in);
-			int maximumNumber = Utils.promptUserForNumber(input, "Guess the correct number between 0 and ");
-			int numberOfGuesses = Utils.promptUserForNumber(input, "How many guesses do you want to have? ");
+			int maximumNumber = Utils.promptUserForNumber(input, "Guess the correct number between 1 and ");
+			int numberOfGuesses = Utils.promptUserForNumber(input, "How many guesses do you want to have? ", maximumNumber);
 			GameSettings gameSettings = new GameSettings(maximumNumber, numberOfGuesses);
 			round(input, gameSettings);
 			System.out.println("Want to guess another number?");
@@ -28,9 +28,7 @@ public class Game {
 	private static void round(Scanner input, GameSettings gameSettings) {
 		RandomNumber number = new RandomNumber(gameSettings.getMaximumNumber());
 		for (int i = 1; i <= gameSettings.getNumberOfGuesses(); i++) {
-			System.out.print("Guess " + i + "/" + gameSettings.getNumberOfGuesses() + ": ");
-			int guess = input.nextInt();
-			input.nextLine();
+			int guess = Utils.promptUserForNumber(input, "Guess " + i + "/" + gameSettings.getNumberOfGuesses() + ": ", gameSettings.getMaximumNumber());
 			if (guess > number.getNumber()) {
 				System.out.println("Too high!");
 			}

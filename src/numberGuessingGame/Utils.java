@@ -21,7 +21,7 @@ public class Utils {
 		}
 	}
 	
-	public static int promptUserForNumber(Scanner input, String promptText) {
+	public static int promptUserForNumber(Scanner input, String promptText, Integer... maximumNumber) {
 		int number;
 		while (true) {
 			try {
@@ -29,8 +29,12 @@ public class Utils {
 				number = input.nextInt();
 				input.nextLine();
 				if (number <= 0) {
-				   System.out.println("Please provide a positive number!");
-				   continue;
+				    System.out.println("Please provide a positive number!");
+				    continue;
+				}
+				else if (maximumNumber.length != 0 && number > maximumNumber[0]) {
+					System.out.println("You can't provide a number higher than " + maximumNumber[0] + "!");
+					continue;
 				}
 				return number;
 			}
