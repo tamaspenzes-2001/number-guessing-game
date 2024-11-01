@@ -10,7 +10,8 @@ public class Game {
 		while (true) {
 			Scanner input = new Scanner(System.in);
 			int maximumNumber = Utils.promptUserForNumber(input);
-			boolean guessedSuccessfully = round(input, maximumNumber);
+			GameSettings gameSettings = new GameSettings(maximumNumber, 5);
+			boolean guessedSuccessfully = round(input, gameSettings);
 			if (guessedSuccessfully) {
 				System.out.println("Congrats! You got it!");
 			}
@@ -30,10 +31,10 @@ public class Game {
 		}
 	}
 
-	private static boolean round(Scanner input, int maximumNumber) {
-		RandomNumber number = new RandomNumber(maximumNumber);
-		for (int i = 1; i <= 5; i++) {
-			System.out.print("Guess " + i + "/5: ");
+	private static boolean round(Scanner input, GameSettings gameSettings) {
+		RandomNumber number = new RandomNumber(gameSettings.getMaximumNumber());
+		for (int i = 1; i <= gameSettings.getNumberOfGuesses(); i++) {
+			System.out.print("Guess " + i + "/" + gameSettings.getNumberOfGuesses() + ": ");
 			int guess = input.nextInt();
 			input.nextLine();
 			if (guess > number.getNumber()) {
