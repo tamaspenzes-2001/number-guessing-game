@@ -21,15 +21,15 @@ public class Utils {
 		}
 	}
 	
-	public static int promptUserForNumber(Scanner input) {
+	public static int promptUserForNumber(Scanner input, String promptText) {
 		int number;
 		while (true) {
 			try {
-				System.out.print("Guess the correct number between 0 and ");
+				System.out.print(promptText);
 				number = input.nextInt();
 				input.nextLine();
-				if (number < 0) {
-				   System.out.println("Please provide a non-negative number!");
+				if (number <= 0) {
+				   System.out.println("Please provide a positive number!");
 				   continue;
 				}
 				return number;

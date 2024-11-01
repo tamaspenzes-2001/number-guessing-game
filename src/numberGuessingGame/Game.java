@@ -9,8 +9,9 @@ public class Game {
 		System.out.println("Welcome!");
 		while (true) {
 			Scanner input = new Scanner(System.in);
-			int maximumNumber = Utils.promptUserForNumber(input);
-			GameSettings gameSettings = new GameSettings(maximumNumber, 5);
+			int maximumNumber = Utils.promptUserForNumber(input, "Guess the correct number between 0 and ");
+			int numberOfGuesses = Utils.promptUserForNumber(input, "How many guesses do you want to have? ");
+			GameSettings gameSettings = new GameSettings(maximumNumber, numberOfGuesses);
 			boolean guessedSuccessfully = round(input, gameSettings);
 			if (guessedSuccessfully) {
 				System.out.println("Congrats! You got it!");
