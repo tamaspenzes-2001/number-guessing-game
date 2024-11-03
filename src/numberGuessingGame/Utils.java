@@ -44,4 +44,9 @@ public class Utils {
 			}
 		}
 	}
+	
+	public static void pressEnterToContinue(Scanner input) {
+		System.out.print("\n[press enter to continue]");
+		input.nextLine();
+	}
 }
