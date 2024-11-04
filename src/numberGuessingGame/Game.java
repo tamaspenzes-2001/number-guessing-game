@@ -11,13 +11,15 @@ public class Game {
 		int maximumNumber = Utils.promptUserForNumber(input, "I want to guess numbers between 1 and ");
 		int numberOfGuesses = Utils.promptUserForNumber(input, "I want to have ... number of guesses. ", maximumNumber);
 		GameSettings gameSettings = new GameSettings(maximumNumber, numberOfGuesses);
+		GameState gameState = new GameState();
 		while (true) {
 			Utils.clearScreen();
-			round(input, gameSettings);
+			round(input, gameSettings, gameState);
 			Utils.pressEnterToContinue(input);
 			loop: while (true) {				
 				Utils.clearScreen();
-				int menuOption = Utils.promptUserForNumber(input, "What to do now?"
+				System.out.println("Your score: " + gameState.getScore());
+				int menuOption = Utils.promptUserForNumber(input, "\nWhat to do now?"
 						+ "\n1. Guess another number"
 						+ "\n2. Modify settings (maximum number, number of guesses etc.)"
 						+ "\n3. Quit\n", 3);
@@ -54,7 +56,7 @@ public class Game {
 		}
 	}
 
-	private static void round(Scanner input, GameSettings gameSettings) {
+	private static void round(Scanner input, GameSettings gameSettings, GameState gameState) {
 		RandomNumber number = new RandomNumber(gameSettings.getMaximumNumber());
 		System.out.println("Guess the correct number between 1 and " + gameSettings.getMaximumNumber());
 		for (int i = 1; i <= gameSettings.getNumberOfGuesses(); i++) {
@@ -67,6 +69,9 @@ public class Game {
 			}
 			else {
 				System.out.println("Congrats! You got it!");
+				int scoreWon = i <= gameSettings.getNumberOfGuesses() / 2 ? 10 : 5;
+				gameState.increaseScore(scoreWon);
+				System.out.println("You got " + scoreWon + " score!");
 				return;
 			}
 		}
