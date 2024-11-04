@@ -15,21 +15,43 @@ public class Game {
 			Utils.clearScreen();
 			round(input, gameSettings);
 			Utils.pressEnterToContinue(input);
-			Utils.clearScreen();
-			int menuOption = Utils.promptUserForNumber(input, "What to do now?"
-					+ "\n1. Guess another number"
-					+ "\n2. Modify settings (maximum number, number of guesses etc.)"
-					+ "\n3. Quit\n", 3);
-			switch (menuOption) {
-				case 1: continue;
-				case 2: modifySettings(gameSettings);
-				case 3: return;
+			loop: while (true) {				
+				Utils.clearScreen();
+				int menuOption = Utils.promptUserForNumber(input, "What to do now?"
+						+ "\n1. Guess another number"
+						+ "\n2. Modify settings (maximum number, number of guesses etc.)"
+						+ "\n3. Quit\n", 3);
+				switch (menuOption) {
+					case 1: break loop;
+					case 2: modifySettings(input, gameSettings);
+					break;
+					case 3: return;
+				}
 			}
 		}
 	}
 
-	private static void modifySettings(GameSettings gameSettings) {
-		// TODO implement
+	private static void modifySettings(Scanner input, GameSettings gameSettings) {
+		while (true) {
+			Utils.clearScreen();
+			int setting = Utils.promptUserForNumber(input, "Settings (with current value). Choose one to modify!"
+					+ "\n1. Maximum number (" + gameSettings.getMaximumNumber() + ")"
+					+ "\n2. Number of guesses (" + gameSettings.getNumberOfGuesses() + ")"
+					+ "\n3. Back to main menu\n", 3);
+			switch (setting) {
+			case 1: {
+				int newMaximumNumber = Utils.promptUserForNumber(input, "Provide new maximum number: ");
+				gameSettings.setMaximumNumber(newMaximumNumber);
+			}
+			break;
+			case 2: {
+				int newNumberOfGuesses = Utils.promptUserForNumber(input, "Modify number of guesses: ", gameSettings.getMaximumNumber());
+				gameSettings.setNumberOfGuesses(newNumberOfGuesses);
+			}
+			break;
+			case 3: return;
+			}
+		}
 	}
 
 	private static void round(Scanner input, GameSettings gameSettings) {
