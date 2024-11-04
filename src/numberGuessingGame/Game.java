@@ -24,6 +24,8 @@ public class Game {
 		while (true) {				
 			Utils.clearScreen();
 			System.out.println("Your score: " + gameState.getScore());
+			System.out.println("Your rank: " + gameState.getRank());
+			System.out.println("Score for next rank up: " + gameState.getNextRankUp());
 			int menuOption = Utils.promptUserForNumber(input, "\nWhat to do now?"
 					+ "\n1. Guess another number"
 					+ "\n2. Modify settings (maximum number, number of guesses etc.)"
