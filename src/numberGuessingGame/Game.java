@@ -16,19 +16,23 @@ public class Game {
 			Utils.clearScreen();
 			round(input, gameSettings, gameState);
 			Utils.pressEnterToContinue(input);
-			loop: while (true) {				
-				Utils.clearScreen();
-				System.out.println("Your score: " + gameState.getScore());
-				int menuOption = Utils.promptUserForNumber(input, "\nWhat to do now?"
-						+ "\n1. Guess another number"
-						+ "\n2. Modify settings (maximum number, number of guesses etc.)"
-						+ "\n3. Quit\n", 3);
-				switch (menuOption) {
-					case 1: break loop;
-					case 2: modifySettings(input, gameSettings);
-					break;
-					case 3: return;
-				}
+			menu(input, gameSettings, gameState);
+		}
+	}
+
+	private static void menu(Scanner input, GameSettings gameSettings, GameState gameState) {
+		while (true) {				
+			Utils.clearScreen();
+			System.out.println("Your score: " + gameState.getScore());
+			int menuOption = Utils.promptUserForNumber(input, "\nWhat to do now?"
+					+ "\n1. Guess another number"
+					+ "\n2. Modify settings (maximum number, number of guesses etc.)"
+					+ "\n3. Quit\n", 3);
+			switch (menuOption) {
+				case 1: return;
+				case 2: modifySettings(input, gameSettings);
+				break;
+				case 3: System.exit(0);
 			}
 		}
 	}
@@ -68,14 +72,14 @@ public class Game {
 				System.out.println("Too low!");
 			}
 			else {
-				System.out.println("Congrats! You got it!");
+				System.out.println("\nCongrats! You got it!");
 				int scoreWon = i <= gameSettings.getNumberOfGuesses() / 2 ? 10 : 5;
 				gameState.increaseScore(scoreWon);
 				System.out.println("You got " + scoreWon + " score!");
 				return;
 			}
 		}
-		System.out.println("You didn't get it. :(");
+		System.out.println("\nYou didn't get it. :(");
 		System.out.println("Maybe next time.");
 	}
 

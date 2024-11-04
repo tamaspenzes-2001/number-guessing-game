@@ -22,11 +22,10 @@ public class Utils {
 	}
 	
 	public static int promptUserForNumber(Scanner input, String promptText, Integer... maximumNumber) {
-		int number;
 		while (true) {
 			try {
 				System.out.print(promptText);
-				number = input.nextInt();
+				int number = input.nextInt();
 				input.nextLine();
 				if (number <= 0) {
 				    System.out.println("Please provide a positive number!");
