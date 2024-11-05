@@ -69,9 +69,7 @@ public class Game {
 			}
 			break;
 			case 3: {
-				System.out.print("Do you want to turn casino mode " + (gameSettings.isCasinoMode() ? "off" : "on") + "? ");
-				String userAnswer = input.nextLine();
-				if (userAnswer.equals("yes")) {
+				if (Utils.promptUserForYesOrNo(input, "Do you want to turn casino mode " + (gameSettings.isCasinoMode() ? "off" : "on") + "? ")) {
 					gameSettings.toggleCasinoMode();
 				}
 			}
