@@ -14,6 +14,13 @@ public class GameState {
 		modifyRank();
 	}
 	
+	public void decreaseScore() {
+		score -=10;
+		if (score < 0) {
+			score = 0;
+		}
+	}
+	
 	private void modifyRank() {
 		int[] ranks = {1000, 500, 100, 50};
 		String[] rankNames = {"Unbeatable Guessing Expert", "Guessing Expert", "Guessing Master", "Guessing Pro"};

@@ -16,6 +16,11 @@ public class Game {
 			Utils.clearScreen();
 			round(input, gameSettings, gameState);
 			Utils.pressEnterToContinue(input);
+			if (gameSettings.isCasinoMode() && gameState.getScore() == 0) { // score never goes below zero (see GameState)
+				Utils.clearScreen();
+				System.out.println("You lost all your score! You got kicked off!");
+				System.exit(0);
+			}
 			menu(input, gameSettings, gameState);
 		}
 	}
@@ -28,7 +33,7 @@ public class Game {
 			System.out.println("Score for next rank up: " + gameState.getNextRankUp());
 			int menuOption = Utils.promptUserForNumber(input, "\nWhat to do now?"
 					+ "\n1. Guess another number"
-					+ "\n2. Modify settings (maximum number, number of guesses etc.)"
+					+ "\n2. Modify settings (maximum number, number of guesses, casino mode)"
 					+ "\n3. Quit\n", 3);
 			switch (menuOption) {
 				case 1: return;
@@ -45,7 +50,8 @@ public class Game {
 			int setting = Utils.promptUserForNumber(input, "Settings (with current value). Choose one to modify!"
 					+ "\n1. Maximum number (" + gameSettings.getMaximumNumber() + ")"
 					+ "\n2. Number of guesses (" + gameSettings.getNumberOfGuesses() + ")"
-					+ "\n3. Back to main menu\n", 3);
+					+ "\n3. Casino mode - lose score if run out of guesses, get kicked off if lost all score (" + (gameSettings.isCasinoMode() ? "on" : "off") + ")"
+					+ "\n4. Back to main menu\n", 4);
 			switch (setting) {
 			case 1: {
 				int newMaximumNumber = Utils.promptUserForNumber(input, "Provide new maximum number: ");
@@ -57,7 +63,15 @@ public class Game {
 				gameSettings.setNumberOfGuesses(newNumberOfGuesses);
 			}
 			break;
-			case 3: return;
+			case 3: {
+				System.out.print("Do you want to turn casino mode " + (gameSettings.isCasinoMode() ? "off" : "on") + "? ");
+				String userAnswer = input.nextLine();
+				if (userAnswer.equals("yes")) {
+					gameSettings.toggleCasinoMode();
+				}
+			}
+			break;
+			case 4: return;
 			}
 		}
 	}
@@ -83,6 +97,10 @@ public class Game {
 		}
 		System.out.println("\nYou didn't get it. :(");
 		System.out.println("Maybe next time.");
+		if (gameSettings.isCasinoMode()) {
+			gameState.decreaseScore();
+			System.out.println("You lost 10 score!");
+		}
 	}
 
 }

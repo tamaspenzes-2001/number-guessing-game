@@ -3,6 +3,7 @@ package numberGuessingGame;
 public class GameSettings {
 	private int maximumNumber;
 	private int numberOfGuesses;
+	private boolean casinoMode = false;
 
 	public GameSettings(int maximumNumber, int numberOfGuesses) {
 		this.maximumNumber = maximumNumber;
@@ -23,5 +24,13 @@ public class GameSettings {
 
 	public void setNumberOfGuesses(int numberOfGuesses) {
 		this.numberOfGuesses = numberOfGuesses;
+	}
+
+	public boolean isCasinoMode() {
+		return casinoMode;
+	}
+
+	public void toggleCasinoMode() {
+		casinoMode = !casinoMode;
 	}
 }
