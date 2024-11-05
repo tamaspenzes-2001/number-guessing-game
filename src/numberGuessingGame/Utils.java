@@ -44,6 +44,22 @@ public class Utils {
 		}
 	}
 	
+	public static boolean promptUserForYesOrNo(Scanner input, String promptText) {
+		while (true) {
+			System.out.print(promptText);
+			String yesOrNo = input.nextLine();
+			if (yesOrNo.equalsIgnoreCase("yes")) {
+				return true;
+			}
+			else if (yesOrNo.equalsIgnoreCase("no")) {
+				return false;
+			}
+			else {
+				System.out.println("Please enter yes or no!");
+			}
+		}
+	}
+	
 	public static void pressEnterToContinue(Scanner input) {
 		System.out.print("\n[press enter to continue]");
 		input.nextLine();

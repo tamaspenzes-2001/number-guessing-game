@@ -39,7 +39,12 @@ public class Game {
 				case 1: return;
 				case 2: modifySettings(input, gameSettings);
 				break;
-				case 3: System.exit(0);
+				case 3: {
+					if (Utils.promptUserForYesOrNo(input, "Are you sure you want to quit? ")) {
+						System.out.println("Bye then!");
+						System.exit(0);
+					}
+				}
 			}
 		}
 	}
